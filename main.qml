@@ -41,6 +41,10 @@ Window {
         speed: 6
     }
 
+    Trees {
+        anchors.fill: parent
+    }
+
 //    Slider {
 //        id: slide
 //        anchors { left: parent.left; right: parent.right; bottom: parent.bottom }

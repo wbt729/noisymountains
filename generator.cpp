@@ -13,7 +13,15 @@ QVector<QPointF> Generator::getData()
     for(int i = 0; i < width; ++i)
     {
         float val = (i + time) / 100;
-        data.append(QPointF(i, SimplexNoise::noise(val)));
+        float y = SimplexNoise::noise(val);
+        y += SimplexNoise::noise((i + time) / 500);
+        data.append(QPointF(i, y));
     }
     return data;
+}
+
+void Generator::setTime(qreal time)
+{
+    this->time = time;
+    emit dataChanged();
 }

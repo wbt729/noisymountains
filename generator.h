@@ -14,9 +14,9 @@ class Generator : public QObject
 public:
     explicit Generator(QObject *parent = nullptr);
 
-    Q_INVOKABLE QVector<QPointF> getData();
+    Q_INVOKABLE virtual QVector<QPointF> getData();
     Q_INVOKABLE void setWidth(qint16 width) { this->width = width; emit widthChanged(); }
-    Q_INVOKABLE void setTime(qreal time) { this->time = time; emit dataChanged(); }
+    Q_INVOKABLE virtual void setTime(qreal time);
     Q_INVOKABLE qreal getTime() { return time; }
 
 signals:
@@ -24,7 +24,8 @@ signals:
     void timeChanged();
     void dataChanged();
 
-private:
+protected:
     qint16 width = 0;
     qreal time = 0;
+    QVector<QPointF> data; // unused
 };

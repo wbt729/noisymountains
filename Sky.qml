@@ -41,7 +41,6 @@ Item {
                 var w = 1
                 ctx.moveTo(x, y);
                 ctx.arc(x, y, w, Math.PI * 0.5, Math.PI * 2, false);
-                ctx.lineTo(x, y);
                 ctx.fill();
             }
         }

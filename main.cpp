@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include "generator.h"
+#include "treegenerator.h"
 
 
 int main(int argc, char *argv[])
@@ -12,6 +13,7 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     qmlRegisterType<Generator>("Rauschberge", 1, 0, "Generator");
+    qmlRegisterType<TreeGenerator>("Rauschberge", 1, 0, "TreeGenerator");
 
     Generator generator;
 

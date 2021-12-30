@@ -3,5 +3,6 @@
         <file>main.qml</file>
         <file>Layer.qml</file>
         <file>Sky.qml</file>
+        <file>Trees.qml</file>
     </qresource>
 </RCC>
