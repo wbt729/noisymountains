@@ -4,7 +4,7 @@ import Rauschberge 1.0
 Item {
     id: root
 
-    property real speed: 1
+    property real speed: 0.1
     property real offset: 0
     property real verticalOffset: 0
     property real amplitude: 10
@@ -20,14 +20,15 @@ Item {
     }
 
     function step() {
-        root.offset += root.speed
-        generator.minimum = root.offset
-        generator.maximum = root.offset + root.width
+        generator.time += root.speed
         canvas.requestPaint()
     }
 
     Generator {
         id: generator
+        width: root.width
+
+        Component.onCompleted: generator.time = root.offset
     }
 
     Canvas {
@@ -35,21 +36,6 @@ Item {
         anchors.fill: parent
 
         property real vCenter: root.verticalOffset
-
-        onWidthChanged: {
-            generator.minimum = offset
-            generator.maximum = offset + width
-
-            if(!treePositions)
-                treePositions = []
-
-            for(var i = generator.minimum; i < generator.maximum; ++i) {
-                if(Math.random() < 0.1) {
-                    treePositions.push(i)
-                }
-            }
-            console.log("trees", treePositions)
-        }
 
         onPaint: {
             var ctx = getContext("2d");
@@ -63,10 +49,11 @@ Item {
 //            ctx.fillStyle = Qt.rgba(0, 0, 0, 1)
             ctx.fillStyle = root.color
             ctx.beginPath()
-            ctx.moveTo(0, org)
+            ctx.moveTo(data[0].x, org)
 
             for(var i = 1; i < width; ++i) {
-                var y = vCenter + root.amplitude * data[i]
+                var x = data[i].x
+                var y = vCenter + root.amplitude * data[i].y
                 ctx.lineTo(i, y)
             }
 
@@ -76,18 +63,6 @@ Item {
             ctx.closePath()
             ctx.fill()
             ctx.stroke()
-
-            for(var i = 0; i < treePositions.length; ++i) {
-                var x = treePositions[i]
-                ctx.beginPath()
-                console.log(x, offset, x - offset, data[x])
-                var y = root.amplitude * data[x]
-                ctx.moveTo(x - offset, y)
-                ctx.lineTo(x - offset, y + 20)
-                ctx.closePath()
-                ctx.stroke()
-                ctx.fill()
-            }
         }
     }
 }

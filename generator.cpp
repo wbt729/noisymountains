@@ -7,13 +7,13 @@ Generator::Generator(QObject *parent)
 {
 }
 
-QVector<qreal> Generator::getData()
+QVector<QPointF> Generator::getData()
 {
-    QVector<qreal> data;
-    for(int i = minimum; i < maximum; ++i)
+    QVector<QPointF> data;
+    for(int i = 0; i < width; ++i)
     {
-        float val = i / 100.0;
-        data.append(SimplexNoise::noise(val));
+        float val = (i + time) / 100;
+        data.append(QPointF(i, SimplexNoise::noise(val)));
     }
     return data;
 }
