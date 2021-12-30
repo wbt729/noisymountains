@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Layer.qml</file>
+        <file>Sky.qml</file>
+    </qresource>
+</RCC>
