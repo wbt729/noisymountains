@@ -1,7 +1,7 @@
 #include "treegenerator.h"
 #include <cstdlib>
 
-constexpr float spawnProbability = 0.42f;
+constexpr float spawnProbability = 0.38f;
 constexpr float speed = 2.5f;
 
 TreeGenerator::TreeGenerator(QObject *parent)
@@ -28,7 +28,6 @@ void TreeGenerator::setTime(qreal time)
     if(std::rand() < ((float) RAND_MAX * spawnProbability))
     {
 //        qDebug() << "add tree";
-//        trees.append(QPointF(width, 0));
         int maxHeight = 200;
         int minHeight = 120;
 

@@ -20,6 +20,7 @@ set(PROJECT_SOURCES
         SimplexNoise/src/SimplexNoise.cpp
         generator.cpp
         treegenerator.cpp
+        mountaingenerator.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

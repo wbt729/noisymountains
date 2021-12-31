@@ -66,7 +66,7 @@ Item {
         }
 
         onStarted: {
-            console.log("started")
+//            console.log("started")
             shootingStarCanvas.origin = Qt.point(
                     Math.random() * shootingStarCanvas.width,
                         -0.3 * shootingStarCanvas.height

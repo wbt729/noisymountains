@@ -3,6 +3,7 @@
 #include <QQmlContext>
 #include "generator.h"
 #include "treegenerator.h"
+#include "mountaingenerator.h"
 
 
 int main(int argc, char *argv[])
@@ -14,6 +15,7 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<Generator>("Rauschberge", 1, 0, "Generator");
     qmlRegisterType<TreeGenerator>("Rauschberge", 1, 0, "TreeGenerator");
+    qmlRegisterType<MountainGenerator>("Rauschberge", 1, 0, "MountainGenerator");
 
     Generator generator;
 
