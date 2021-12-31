@@ -84,8 +84,14 @@ Item {
             var ctx = getContext("2d");
             ctx.reset()
 
+            var grad= ctx.createLinearGradient(origin.x + dist, origin.y + dist, origin.x + 100 + dist, origin.y + 100 + dist);
+            grad.addColorStop(0, "#11ffffff");
+            grad.addColorStop(1, "white");
+
+            ctx.strokeStyle = grad;
+
             ctx.beginPath()
-            ctx.strokeStyle = "yellow"
+            ctx.strokeStyle = grad
             ctx.moveTo(origin.x + dist, origin.y + dist);
             ctx.lineTo(origin.x + 100 + dist, origin.y + 100 + dist)
 
