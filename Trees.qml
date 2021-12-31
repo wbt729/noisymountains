@@ -5,7 +5,7 @@ Item {
     id: root
 
     Timer {
-        interval: 50
+        interval: 20
         onTriggered: root.step()
         repeat: true
         running: true
@@ -29,16 +29,16 @@ Item {
             var ctx = getContext("2d");
             ctx.reset()
 
-            var positions = generator.data
-            console.log(positions)
+            var trees = generator.trees
+//            console.log(positions)
 
-            for(var p = 0; p < positions.length; ++p) {
-                console.log(p)
+            for(var p = 0; p < trees.length; ++p) {
+//                console.log(p)
 //                var centerX = canvas.width / 2
-                var centerX = positions[p].x
-                var height = canvas.height / 2
+                var centerX = trees[p].x
+                var height = trees[p].height
 //                var width = Math.random() * (height / 2 - height / 4) + height / 4
-                var width = height / 2
+                var width = trees[p].width
 
                 ctx.strokeStyle = "black"
 

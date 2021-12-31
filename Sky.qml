@@ -16,7 +16,7 @@ Item {
     Rectangle {
         anchors.fill: parent
         gradient: Gradient {
-            GradientStop { position: 0.6; color: "white" }
+            GradientStop { position: 0.8; color: "white" }
             GradientStop { position: 0.0; color: "darkblue" }
         }
     }
@@ -43,6 +43,53 @@ Item {
                 ctx.arc(x, y, w, Math.PI * 0.5, Math.PI * 2, false);
                 ctx.fill();
             }
+        }
+    }
+
+    Timer {
+        id: shootingStarTimer
+        onTriggered: anim.start()
+    }
+
+    PropertyAnimation {
+        id: anim;
+        target: shootingStarCanvas
+        property: "dist"
+        from: 0
+        to: 1200;
+        duration: 2500
+        running: true
+
+        onStopped: {
+            shootingStarTimer.interval = 6000 * Math.random()
+            shootingStarTimer.start()
+        }
+
+        onStarted: {
+            console.log("started")
+            shootingStarCanvas.origin = Qt.point(
+                    Math.random() * shootingStarCanvas.width,
+                        -0.3 * shootingStarCanvas.height
+                        )
+        }
+    }
+
+    Canvas {
+        id: shootingStarCanvas
+        property real dist: 0
+        property point origin: Qt.point(0, 0)
+        anchors.fill: parent
+        onDistChanged: requestPaint()
+        onPaint: {
+            var ctx = getContext("2d");
+            ctx.reset()
+
+            ctx.beginPath()
+            ctx.strokeStyle = "yellow"
+            ctx.moveTo(origin.x + dist, origin.y + dist);
+            ctx.lineTo(origin.x + 100 + dist, origin.y + 100 + dist)
+
+            ctx.stroke()
         }
     }
 }

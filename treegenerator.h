@@ -27,13 +27,17 @@ private:
     qreal x = 0;
 };
 
+Q_DECLARE_METATYPE(Tree*)
+
 class TreeGenerator : public Generator
 {
     Q_OBJECT
+    Q_PROPERTY(QVector<Tree*> trees READ getTrees)
 public:
     explicit TreeGenerator(QObject *parent = nullptr);
     Q_INVOKABLE void setTime(qreal time) override;
     Q_INVOKABLE QVector<QPointF> getData() override;
+    Q_INVOKABLE QVector<Tree*> getTrees() { return trees; }
 
 signals:
 
