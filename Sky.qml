@@ -16,32 +16,49 @@ Item {
     Rectangle {
         anchors.fill: parent
         gradient: Gradient {
-            GradientStop { position: 0.8; color: "white" }
+            GradientStop { position: 0.9; color: "white" }
             GradientStop { position: 0.0; color: "darkblue" }
         }
     }
 
-    Canvas {
-        id: canvas
+    onWidthChanged: repeater.model = root.positions.length
+
+    Repeater {
+        id: repeater
         anchors.fill: parent
 
+        delegate: Rectangle {
+            id: star
+            height: 1
+            width: height
+            radius: width / 2
+            color: "yellow"
+            x: root.positions[model.index].x * root.width
+            y: root.positions[model.index].y * root.height
 
+            Timer {
+                repeat: true
+                interval: Math.random() * 3000 + 1000
+                onTriggered: {
+                    if(Math.random() < 0.1) {
+                        anim.start()
+                    }
+                }
+                running: true
+            }
 
-        onPaint: {
-            var ctx = getContext("2d");
-            ctx.reset()
+            PropertyAnimation {
+                id: anim
+                target: star
+                property: "height"
+                from: 2
+                to: 1
+                duration: 2000
+            }
 
-            for(var i = 0; i < count; ++i) {
-                ctx.beginPath();
-//                ctx.fillStyle = "white";
-                ctx.fillStyle = "yellow";
-                var center = root.positions[i]
-                var x = center.x * root.width
-                var y = center.y * root.height
-                var w = 1
-                ctx.moveTo(x, y);
-                ctx.arc(x, y, w, Math.PI * 0.5, Math.PI * 2, false);
-                ctx.fill();
+            ColorAnimation {
+                from: "white"
+                to: "yellow"
             }
         }
     }

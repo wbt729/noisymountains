@@ -26,25 +26,13 @@ MountainGenerator::MountainGenerator(QObject *parent)
 void MountainGenerator::setTime(qreal time)
 {
     this->time = time;
-    qDebug() << time;
 
     for(int i = mountains.size() - 1; i >= 0; --i)
     {
         mountains[i]->setX(mountains[i]->getX() - speed);
     }
 
-//    if(std::rand() < ((float) RAND_MAX * spawnProbability))
-//    {
-//        qDebug() << "add mountain";
-//        int maxHeight = 200;
-//        int minHeight = 120;
-
-//        qreal height = minHeight + std::rand() % maxHeight + 1 - minHeight;
-//        qreal width = height / 2;
-//        Mountain* mountain = new Mountain;
-//        mountain->setX(width + mountain->width * 1.5);
-//        mountains.append(mountain);
-//    }
+    // TODO take out mountains after the leave image area
 
     if(this->time >= nextSpawnTime)
     {
